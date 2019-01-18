@@ -81,6 +81,8 @@ items:
     name: webhookd
   spec:
     rules:
+      # Edit me. You'd need to take care of registering the subdomain + optionally issuing a TLS certificate for it.
+      # I use external-dns (which is a bit obsolete i think) + cert-manager to handle this automatically when new Ingresses are registered.
     - host: hook.mydomain.com
       http:
         paths:
@@ -117,7 +119,8 @@ items:
   kind: RoleBinding
   metadata:
     name: webhookd
-    namespace: app
+    # Edit me: you'll have to match this to the namespace of your deployment so webhookd can patch it
+    namespace: default
   roleRef:
     apiGroup: rbac.authorization.k8s.io
     kind: ClusterRole
